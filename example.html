@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<script src="jquery-2.2.3.min.js"></script>
+		<script src="sorcery.js"></script>
+		<script src="focus.js"></script>
+		<script>
+			function onFocus(groupname) {
+				$("#"+groupname).css("border", "1px solid black");
+				console.log(groupname + "|Focus");
+			} 
+			function onBlur(groupName) {
+				$("#"+groupName).css("border", "none");
+				console.log(groupName + "|Blur");
+			}
+			function onChange(groupName, obj, changes) {
+				console.log(groupName + "|Changed", obj, changes);
+			}
+		</script>
+	</head>
+	<body>
+		<div id="Outer2">
+			<div id="Outer">
+			Outer
+				<div id="Inner">
+				<input type="hidden" name="addressId" value="9823592" persistant />
+				<div>Inner</div>
+				<div>
+					<input name="g8a9sg$8as98g$test" type="text" />
+					<input name="test2[]" type="text" />
+					<input name="test2[]" type="text" />
+					<input name="test2[]" type="text" />
+					<input name="test2[]" type="text" />
+					</div>
+				</div>
+				<input name="test3" type="text" />
+				<input type="button" value="Outer" />
+			</div>
+			<input name="test4" type="text" />
+		</div>
+		<button onclick="window.location = window.location">Test</button>
+		<script>
+			$("#Outer2").focusGroup(
+				{	name:		"Outer2",
+					onfocus:	onFocus,
+					onblur:		onBlur,
+					onchange:	onChange,
+					children:	"all"
+				}
+			);
+			$("#Inner").focusGroup(
+				{	name: 		"Inner",
+					onfocus:	onFocus,
+					onblur:		onBlur,
+					onchange:	onChange,
+					children: "all"
+				}
+			);
+			$("#Outer").focusGroup(
+				{	name:		"Outer",
+					onfocus:	onFocus,
+					onblur:		onBlur,
+					onchange:	onChange
+				}
+			);
+		</script>
+	</body>
+</html>
