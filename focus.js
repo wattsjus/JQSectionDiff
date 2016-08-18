@@ -46,8 +46,12 @@ $.fn.focusGroup.prototype.processEvent = function(a, focus_group, decendants, pa
 						$.fn.focusGroup.prototype.groupFormValues[params.name] = currFormVal;
 						for(var form in $.fn.focusGroup.prototype.groupFormValues) {
 							for(var change in changes) {
-								if($.fn.focusGroup.prototype.groupFormValues[form][change]) {
-									$.extend($.fn.focusGroup.prototype.groupFormValues[form][change], changes[change]);
+								if(!!$.fn.focusGroup.prototype.groupFormValues[form][change]) {
+									if($.isArray(changes[change]) || $.isPlainObject(changes[change])) {
+										$.extend($.fn.focusGroup.prototype.groupFormValues[form][change], changes[change]);
+									} else {
+										$.fn.focusGroup.prototype.groupFormValues[form][change] = changes[change];
+									}
 								}
 							}
 						}
